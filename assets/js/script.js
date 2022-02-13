@@ -51,7 +51,7 @@ $(".list-group").on("click", "p", function () {
   let text = $(this)
     .text()
     .trim();
-    
+
   // create a textarea element and add class and value of text
   let textInput = $("<textarea>").addClass("form-control").val(text);
 
@@ -90,7 +90,7 @@ $(".list-group").on("blur", "textarea", function () {
 });
 
 //When clicking on due date to edit
-$(".list-group").on("click", "span", function(){
+$(".list-group").on("click", "span", function () {
   let date = $(this).text().trim();
 
   //create new input element
@@ -102,7 +102,7 @@ $(".list-group").on("click", "span", function(){
 });
 
 //when user clicks outside of data, edited date is saved
-$(".list-group").on("blur", "input", function(){
+$(".list-group").on("blur", "input", function () {
   let date = $(this).val().trim();
 
   //get ul's id
@@ -118,6 +118,64 @@ $(".list-group").on("blur", "input", function(){
   let taskSpan = $("<span>").addClass("badge badge-primary badge-pill").text(date);
 
   $(this).replaceWith(taskSpan);
+})
+
+//Sortable list
+$(".card .list-group").sortable({
+  connectWith: $(".card .list-group"),
+  scroll: false,
+  tolerance: "pointer",
+  helper: "clone", //create a copy of the dragged element and move the copy instead of the original
+  activate: function (event) {
+    console.log("activate", this);
+  },
+  deactivate: function (event) {
+    console.log("deactivate", this);
+  },
+  over: function (event) {
+    console.log("over", event.target);
+  },
+  out: function (event) {
+    console.log("out", event.target);
+  },
+  update: function (event) {
+    let tempArr = [];
+
+    // loop over current set of children in sortable list (ul)
+    $(this).children().each(function () {
+      //this refers to child (li)
+      let text = $(this).find("p").text().trim();
+      let date = $(this).find("span").text().trim();
+
+      //use the tempArr array to overwrite what's currently saved in the tasks obj
+      tempArr.push({
+        text: text,
+        date: date
+      });
+    });
+    // trim down list's ID to match object property
+    let arrName = $(this).attr("id").replace("list-", "");
+
+    // update array on tasks object and save
+    tasks[arrName] = tempArr; //places our tempArr object into the appropriate array
+    saveTasks();
+  }
+});
+
+//DELETE
+$("#trash").droppable({
+  accept: ".card .list-group-item",
+  tolarance: "touch",
+  drop: function (event, ui) {
+    ui.draggable.remove(); //ui is an object that contains a property called draggable. According to the documentation, draggable is "a jQuery object representing the draggable element.
+   //Removing a task from any of the lists triggers a sortable update(), meaning the sortable calls saveTasks() for us
+  },
+  over: function (event, ui) {
+    console.log("Over");
+  },
+  out: function (event, ui) {
+    console.log("Out");
+  }
 })
 
 
