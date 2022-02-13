@@ -13,6 +13,7 @@ var createTask = function (taskText, taskDate, taskList) {
   // append span and p element to parent li
   taskLi.append(taskSpan, taskP);
 
+  auditTask(taskLi);
 
   // append to ul list on the page
   $("#list-" + taskList).append(taskLi);
@@ -98,11 +99,19 @@ $(".list-group").on("click", "span", function () {
 
   $(this).replaceWith(dateInput);
 
+  dateInput.datepicker({
+    minDate: 0,
+    onClose: function(){
+      // when calendar is closed, force a "change" event on the `dateInput`
+      $(this).trigger("change");
+    }
+  });
+
   dateInput.trigger("focus");
 });
 
 //when user clicks outside of data, edited date is saved
-$(".list-group").on("blur", "input", function () {
+$(".list-group").on("change", "input[type='text']", function () {
   let date = $(this).val().trim();
 
   //get ul's id
@@ -118,6 +127,9 @@ $(".list-group").on("blur", "input", function () {
   let taskSpan = $("<span>").addClass("badge badge-primary badge-pill").text(date);
 
   $(this).replaceWith(taskSpan);
+
+  // Pass task's <li> element into auditTask() to check new due date
+  auditTask($(taskSpan).closest(".list-group-item"));
 })
 
 //Sortable list
@@ -177,6 +189,31 @@ $("#trash").droppable({
     console.log("Out");
   }
 })
+
+//Date picker
+
+$("#modalDueDate").datepicker({
+  minDate: 0
+});
+
+//Due Dates - Audit
+
+const auditTask = function(taskEl){
+  // get the date from span
+  let date = $(taskEl).find("span").text().trim();
+  
+  let time = moment(date, "L").set("hour", 17);
+
+  // remove any old classes from element
+  $(taskEl).removeClass("list-group-item-warning list-group-item-danger");
+  
+  if(moment().isAfter(time)){
+    $(taskEl).addClass("list-group-item-danger");
+  }
+  else if(Math.abs(moment().diff(time, "days")) <= 2){
+    $(taskEl).addClass("list-group-item-warning");
+  }
+};
 
 
 // modal was triggered
