@@ -1,3 +1,51 @@
+:root{
+  --primary-font: 'Open Sans', sans-serif;
+  --secondary-font: 'Staatliches', cursive;
+}
+
+body{
+  font-family: var(--primary-font);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+  font-family: var(--secondary-font);
+}
+
+.card{
+  width: 250px;
+  margin-bottom: 1rem;
+}
+
 ul.list-group {
   min-height: 130px;
+}
+
+.icon-img{
+  height: 1rem;
+  width: auto;
+  margin-right: .5rem;
+  margin-bottom: 0.3rem;
+}
+
+.icon-check{
+  height: 2rem;
+  width: auto;
+  margin: 0 .75rem .5rem 0;
+}
+
+.icon-check-big{
+  height: 12rem;
+  width: 75%;
+  margin: 0 auto;
+}
+
+#trash img{
+  height: 4rem;
+  width: auto;
+  margin-bottom: 1.0rem;
 }
