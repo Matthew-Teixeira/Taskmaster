@@ -9,6 +9,13 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Staatliches&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
+    <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Taskmaster Pro</title>
   </head>
@@ -18,19 +25,20 @@
       <header
         class="col-12 col-lg-3 bg-dark text-light d-flex flex-column p-4 p-lg-3 sticky-top"
       >
-        <h1 class="text-center">Taskmaster Pro Edition</h1>
+        <h1 class="text-center"><img class="icon-check d-inline d-lg-none" src="https://img.icons8.com/material-outlined/96/000000/task-completed.png"/>Taskmaster Pro Edition</h1>
         <button
           id="create-task"
           class="btn btn-block btn-success"
           data-toggle="modal"
           data-target="#task-form-modal"
         >
-          Add Task
+        <img class="icon-img" src="https://img.icons8.com/ios-glyphs/30/000000/plus-math.png"/> Add Task
         </button>
         <button id="remove-tasks" class="btn btn-block btn-danger">
-          Delete All Tasks
+          <img class="icon-img" src="https://img.icons8.com/fluency-systems-filled/48/000000/delete.png"/> Delete All Tasks
         </button>
-        <p class="mt-auto d-none d-lg-block">
+        <img class="icon-check-big mt-auto d-none d-lg-block" src="https://img.icons8.com/material-outlined/96/000000/task-completed.png"/>
+        <p class="mt-1 d-none d-lg-block">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi voluptas
           architecto ipsa excepturi aut non laudantium sequi fugit officiis
           optio deleniti asperiores rem eius laborum maxime blanditiis culpa,
@@ -73,7 +81,7 @@
         </div>
         <div id="trash" class="mt-auto">
           <div class="w-100 bg-danger p-3 text-center text-light display-4">
-            Drop Here to Remove.
+            <img src="https://img.icons8.com/fluency-systems-filled/48/000000/delete.png"/> Drop Here to Remove.
           </div>
         </div>
       </main>
@@ -139,6 +147,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
