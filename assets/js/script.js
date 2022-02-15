@@ -139,16 +139,18 @@ $(".card .list-group").sortable({
   tolerance: "pointer",
   helper: "clone", //create a copy of the dragged element and move the copy instead of the original
   activate: function (event) {
-    console.log("activate", this);
+    $(this).addClass("dropover");
+    $(".bottom-trash").addClass("bottom-trash-drag");
   },
   deactivate: function (event) {
-    console.log("deactivate", this);
+    $(this).removeClass("dropover");
+    $(".bottom-trash").removeClass("bottom-trash-drag");
   },
   over: function (event) {
-    console.log("over", event.target);
+    $(event.target).addClass("dropover-active");
   },
   out: function (event) {
-    console.log("out", event.target);
+    $(event.target).removeClass("dropover-active");
   },
   update: function (event) {
     let tempArr = [];
@@ -180,13 +182,14 @@ $("#trash").droppable({
   tolarance: "touch",
   drop: function (event, ui) {
     ui.draggable.remove(); //ui is an object that contains a property called draggable. According to the documentation, draggable is "a jQuery object representing the draggable element.
-   //Removing a task from any of the lists triggers a sortable update(), meaning the sortable calls saveTasks() for us
+    $(".bottom-trash").removeClass(".bottom-trash-active");
+    //Removing a task from any of the lists triggers a sortable update(), meaning the sortable calls saveTasks() for us
   },
   over: function (event, ui) {
-    console.log("Over");
+    $(".bottom-trash").addClass(".bottom-trash-active");
   },
   out: function (event, ui) {
-    console.log("Out");
+    $(".bottom-trash").removeClass(".bottom-trash-active");
   }
 })
 
@@ -229,7 +232,7 @@ $("#task-form-modal").on("shown.bs.modal", function () {
 });
 
 // save button in modal was clicked
-$("#task-form-modal .btn-primary").click(function () {
+$("#task-form-modal .btn-save").click(function () {
   // get form values
   var taskText = $("#modalTaskDescription").val();
   var taskDate = $("#modalDueDate").val();
